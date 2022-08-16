@@ -43,7 +43,8 @@ public class TextFunkifierTest {
      */
 
     @Test
-    public void testCustomString() {
-
+    public void testBob() {
+    	Bob bob = new Bob("Trees");
+        assertEquals("TREES", bob.funkifyText());
     }
 }
