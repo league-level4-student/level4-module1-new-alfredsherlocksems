@@ -6,6 +6,7 @@ import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 
@@ -55,7 +56,7 @@ import javax.swing.Timer;
  *  clicked. Hint: MouseListener interface.
  */
 
-public class PolymorphWindow extends JPanel implements ActionListener, MouseMotionListener {
+public class PolymorphWindow extends JPanel implements ActionListener, MouseMotionListener, MouseListener {
 
     public static final int WIDTH = 900;
     public static final int HEIGHT = 600;
@@ -72,6 +73,8 @@ public class PolymorphWindow extends JPanel implements ActionListener, MouseMoti
     Polymorph red = new RedPolymorph(100, 100, 100, 100);
     
     Polymorph mouseMove = new mouseMorph(300, 150, 50, 50);
+    
+    Polymorph writeMorph = new WriteMorph(0, 0, 50, 50);
 
     public static void main(String[] args) {
         new PolymorphWindow().buildWindow();
@@ -85,6 +88,7 @@ public class PolymorphWindow extends JPanel implements ActionListener, MouseMoti
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.pack();
         window.setVisible(true);
+        window.addMouseListener(this);
 
         bluePoly = new BluePolymorph(50, 50, 50, 50);
 
@@ -105,7 +109,10 @@ public class PolymorphWindow extends JPanel implements ActionListener, MouseMoti
        for(int i = 0; i < list.size(); i++) {
     	   list.get(i).draw(g);
        }
-    }
+       mouseMove.draw(g);
+       g.setColor(Color.GREEN);
+       writeMorph.draw(g);
+       }
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -119,11 +126,46 @@ public class PolymorphWindow extends JPanel implements ActionListener, MouseMoti
 	@Override
 	public void mouseDragged(MouseEvent arg0) {
 		// TODO Auto-generated method stub
-		mouseMove.update(arg0.getX(), arg0.getY());
+		
 	}
 
 	@Override
 	public void mouseMoved(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		mouseMove.update(arg0.getX(), arg0.getY());
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		if (arg0.getX() > 0 && arg0.getX() < 50) {
+			if (arg0.getY() > 0 && arg0.getY() < 50) {
+				writeMorph.update();
+			}
+		}
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+	
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 		
 	}
